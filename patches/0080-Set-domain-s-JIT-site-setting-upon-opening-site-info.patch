@@ -30,7 +30,7 @@ index 2e1e032..dca486f 100644
 +                ContentSettingsType jitSetting = ContentSettingsType.JAVASCRIPT_JIT;
 +                if (merged.getContentSettngException(jitSetting) != null) continue;
 +                ContentSettingException domException = 
-+                        domSite.getContentSettingException(jitSetting);
++                        domWeb.getContentSettingException(jitSetting);
 +                BrowserContextHandle browserContextHandle = 
 +                        getSiteSettingsDelegate().getBrowserContextHandle();
 +                if (domException != null) {
