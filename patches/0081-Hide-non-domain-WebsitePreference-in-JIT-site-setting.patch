@@ -1,0 +1,29 @@
+From 1a70d1d32e92453164d3862615261032655f63cd Mon Sep 17 00:00:00 2001
+From: fgei <fgei@gmail.com>
+Date: Fri, 10 Dec 2021 10:53:05 +0000
+Subject: [PATCH] [UNTESTED] Hide non-domain WebsitePreference in JIT site setting
+
+---
+ .../browser_ui/site_settings/SingleCategorySettings.java    | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleCategorySettings.java b/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleCategorySettings.java
+index cb406d9..fbccad2 100644
+--- a/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleCategorySettings.java
++++ b/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleCategorySettings.java
+@@ -243,6 +243,12 @@ public class SingleCategorySettings extends SiteSettingsPreferenceFragment
+                 getSiteSettingsDelegate().getBrowserContextHandle();
+         for (@SiteSettingsCategory.Type int i = 0; i < SiteSettingsCategory.Type.NUM_ENTRIES; i++) {
+             if (!mCategory.showSites(i)) continue;
++            WebsiteAddress newWebAddr = WebsiteAddress.create(
++                            website.site().getAddress().getDomainAndRegistry());
++            if (!newWebAddr.equals(website.site().getAddress()) && SiteSettingsCategory
++                    .contentSettingsType(i) == ContentSettingsType.JAVASCRIPT_JIT) { 
++                website.setVisibility(false); 
++            }
+             @ContentSettingValues
+             Integer contentSetting = website.site().getContentSetting(
+                     browserContextHandle, SiteSettingsCategory.contentSettingsType(i));
+-- 
+2.26.3
+
