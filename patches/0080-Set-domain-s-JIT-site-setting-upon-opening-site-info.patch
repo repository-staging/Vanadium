@@ -1,0 +1,46 @@
+From cce2da900f1553081a09e5005387a6d4a4622f0f Mon Sep 17 00:00:00 2001
+From: fgei <fgei@gmail.com>
+Date: Fri, 10 Dec 2021 10:53:05 +0000
+Subject: [PATCH] [UNTESTED] Set domain's JIT site setting upon opening site info
+
+---
+ .../site_settings/SingleWebsiteSettings.java     | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleWebsiteSettings.java b/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleWebsiteSettings.java
+index 2e1e032..dca486f 100644
+--- a/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleWebsiteSettings.java
++++ b/components/browser_ui/site_settings/android/java/src/org/chromium/components/browser_ui/site_settings/SingleWebsiteSettings.java
+@@ -378,6 +378,9 @@ public class SingleWebsiteSettings extends SiteSettingsPreferenceFragment
+         String origin = address.getOrigin();
+         String host = Uri.parse(origin).getHost();
+         Website merged = new Website(address, null);
++        String domUrl = address.getDomainAndRegistry();
++        WebsiteAddress domAddr = WebsiteAddress.create(domUrl);
++        Website domWeb = new Website(domAddr, null);
+         // This loop looks expensive, but the amount of data is likely to be relatively small
+         // because most sites have very few permissions.
+         for (Website other : websites) {
+@@ -418,6 +421,19 @@ public class SingleWebsiteSettings extends SiteSettingsPreferenceFragment
+                     }
+                 }
+             }
++            if (domAddr.equals(WebsiteAddress.create(others
++                   .getAddress().getDomainAndRegistry())) && !address.equals(domAddr)) {
++                ContentSettingsType jitSetting = ContentSettingsType.JAVASCRIPT_JIT;
++                if (merged.getContentSettngException(jitSetting) != null) continue;
++                ContentSettingException domException = 
++                        domSite.getContentSettingException(jitSetting);
++                BrowserContextHandle browserContextHandle = 
++                        getSiteSettingsDelegate().getBrowserContextHandle();
++                if (domException != null) {
++                    Integer value = domException.getContentSetting();
++                    merged.setContentSetting(browserContextHandle, jitSetting, value);
++                }
++            }
+ 
+             // TODO(crbug.com/763982): Deal with this TODO colony.
+             // TODO(mvanouwerkerk): Make the various info types share a common interface that
+-- 
+2.26.3
+
