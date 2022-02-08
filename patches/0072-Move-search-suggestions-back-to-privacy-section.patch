@@ -28,10 +28,10 @@ diff --git a/chrome/android/java/src/org/chromium/chrome/browser/privacy/setting
 index b97e5e5f54794..55841346f03a2 100644
 --- a/chrome/android/java/src/org/chromium/chrome/browser/privacy/settings/PrivacySettings.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/privacy/settings/PrivacySettings.java
-@@ -52,6 +52,7 @@ import org.chromium.ui.text.SpanApplier;
+@@ -49,6 +49,7 @@ import org.chromium.ui.text.SpanApplier;
+  */
  public class PrivacySettings
          extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
-     private static final String PREF_FORCE_NO_JIT = "force_no_jit";
 +    private static final String PREF_SEARCH_SUGGESTIONS = "search_suggestions";
      private static final String PREF_CAN_MAKE_PAYMENT = "can_make_payment";
      private static final String PREF_PRELOAD_PAGES = "preload_pages";
@@ -59,9 +59,9 @@ index b97e5e5f54794..55841346f03a2 100644
 +        } else if (PREF_CAN_MAKE_PAYMENT.equals(key)) {
              UserPrefs.get(Profile.getLastUsedRegularProfile())
                      .setBoolean(Pref.CAN_MAKE_PAYMENT_ENABLED, (boolean) newValue);
-         } else if (PREF_FORCE_NO_JIT.equals(key)) {
-@@ -199,6 +208,12 @@ public class PrivacySettings
- 
+         } else if (PREF_HTTPS_FIRST_MODE.equals(key)) {
+@@ -188,6 +197,12 @@ public class PrivacySettings
+     public void updatePreferences() {
          PrefService prefService = UserPrefs.get(Profile.getLastUsedRegularProfile());
  
 +        ChromeSwitchPreference searchSuggestionsPref =
