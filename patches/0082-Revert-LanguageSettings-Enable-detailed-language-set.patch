@@ -1,0 +1,53 @@
+From 65ba2cc2a28e7187a372e2a509ea031f17a52fa0 Mon Sep 17 00:00:00 2001
+From: fgei <fgei@gmail.com>
+Date: Tue, 8 Feb 2022 03:04:20 +0000
+Subject: [PATCH] Revert "[LanguageSettings] Enable detailed language settings
+ by default"
+
+This reverts commit 6aebb0edd28681045461a197b6068884cd5ca759.
+---
+ .../language/core/common/language_experiments.cc  |  4 ++--
+ testing/variations/fieldtrial_testing_config.json | 15 +++++++++++++++
+ 2 files changed, 17 insertions(+), 2 deletions(-)
+
+diff --git a/components/language/core/common/language_experiments.cc b/components/language/core/common/language_experiments.cc
+index a43f232345326..c7fb719a95cb2 100644
+--- a/components/language/core/common/language_experiments.cc
++++ b/components/language/core/common/language_experiments.cc
+@@ -24,8 +24,8 @@ const base::Feature kForceAppLanguagePrompt{"ForceAppLanguagePrompt",
+                                             base::FEATURE_DISABLED_BY_DEFAULT};
+ const base::Feature kNotifySyncOnLanguageDetermined{
+     "NotifySyncOnLanguageDetermined", base::FEATURE_ENABLED_BY_DEFAULT};
+-const base::Feature kDetailedLanguageSettings{"DetailedLanguageSettings",
+-                                              base::FEATURE_ENABLED_BY_DEFAULT};
++const base::Feature kDetailedLanguageSettings{
++    "DetailedLanguageSettings", base::FEATURE_DISABLED_BY_DEFAULT};
+ const base::Feature kDesktopRestructuredLanguageSettings{
+     "DesktopRestructuredLanguageSettings", base::FEATURE_DISABLED_BY_DEFAULT};
+ const base::Feature kDesktopDetailedLanguageSettings{
+diff --git a/testing/variations/fieldtrial_testing_config.json b/testing/variations/fieldtrial_testing_config.json
+index 8cb859a77f8b1..01d974e6ef9da 100644
+--- a/testing/variations/fieldtrial_testing_config.json
++++ b/testing/variations/fieldtrial_testing_config.json
+@@ -2417,6 +2417,21 @@
+             ]
+         }
+     ],
++    "ClankDetailedLanguageSettings": [
++        {
++            "platforms": [
++                "android"
++            ],
++            "experiments": [
++                {
++                    "name": "Enabled",
++                    "enable_features": [
++                        "DetailedLanguageSettings"
++                    ]
++                }
++            ]
++        }
++    ],
+     "ClientSideDetectionReferrerChain": [
+         {
+             "platforms": [
