@@ -1,4 +1,4 @@
-From ec1608827295e9cab5803a160fa54346a4e6d999 Mon Sep 17 00:00:00 2001
+From 9454513d47c28de3529005a010375dc537fa91a5 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Thu, 19 Nov 2020 07:59:29 -0500
 Subject: [PATCH] disable GaiaAuthFetcher code due to upstream bug

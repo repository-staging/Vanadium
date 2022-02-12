@@ -1,4 +1,4 @@
-From 65ba2cc2a28e7187a372e2a509ea031f17a52fa0 Mon Sep 17 00:00:00 2001
+From d2643c79e9e74ae9294af710fe1b2d0c865a92c4 Mon Sep 17 00:00:00 2001
 From: fgei <fgei@gmail.com>
 Date: Tue, 8 Feb 2022 03:04:20 +0000
 Subject: [PATCH] Revert "[LanguageSettings] Enable detailed language settings

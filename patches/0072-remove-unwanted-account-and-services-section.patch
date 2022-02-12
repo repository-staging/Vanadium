@@ -1,4 +1,4 @@
-From 005da31a172df5763a13e3badbf9dec45b058b5a Mon Sep 17 00:00:00 2001
+From bfea02c1ee82a6caff5862f08eabca0a61bd4297 Mon Sep 17 00:00:00 2001
 From: fgei <fgei@gmail.com>
 Date: Fri, 20 Aug 2021 16:13:42 +0000
 Subject: [PATCH] remove unwanted account and services section

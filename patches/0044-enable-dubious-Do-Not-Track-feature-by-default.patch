@@ -1,4 +1,4 @@
-From cc6f299eb5e0e241b4a3078c6ab20807575a2a0c Mon Sep 17 00:00:00 2001
+From 452496794efb36f2596c9632a444c49f2d80cc79 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Tue, 1 Aug 2017 11:16:11 -0400
 Subject: [PATCH] enable dubious Do Not Track feature by default

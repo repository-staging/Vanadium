@@ -1,4 +1,4 @@
-From 71c9664c3bba552f7a8036bef5a1de56a7adbd15 Mon Sep 17 00:00:00 2001
+From 938b7d9dc8feb15f6c7ab8fbe5d21531c38ab746 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Thu, 2 May 2019 07:15:32 -0400
 Subject: [PATCH] enable strict site isolation by default on Android
@@ -9,10 +9,10 @@ Subject: [PATCH] enable strict site isolation by default on Android
  2 files changed, 1 insertion(+), 17 deletions(-)
 
 diff --git a/chrome/browser/about_flags.cc b/chrome/browser/about_flags.cc
-index 6747b0a1a44fb..6129fb123f2d3 100644
+index fddb668a34044..d199392b416ca 100644
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -3613,16 +3613,6 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -3617,16 +3617,6 @@ const FeatureEntry kFeatureEntries[] = {
       flag_descriptions::kMojoLinuxChannelSharedMemDescription,
       kOsCrOS | kOsLinux | kOsAndroid,
       FEATURE_VALUE_TYPE(mojo::core::kMojoLinuxChannelSharedMem)},

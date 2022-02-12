@@ -1,4 +1,4 @@
-From d39b8e276bbf9faef4c7fa36f0fa627d3a11a48a Mon Sep 17 00:00:00 2001
+From f54c971fedaaeddeadec83235e96006fcd7a5d1c Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Wed, 8 Apr 2020 09:51:35 -0400
 Subject: [PATCH] remove Google prefix from storage settings label

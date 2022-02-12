@@ -1,4 +1,4 @@
-From 81837421f77db0bb83424894bc9e32f249b8adbf Mon Sep 17 00:00:00 2001
+From e57b19ffdc60882eec30566d8cc3db8f449c2778 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Fri, 2 Aug 2019 22:06:31 -0400
 Subject: [PATCH] remove data reduction preference

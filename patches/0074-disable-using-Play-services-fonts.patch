@@ -1,4 +1,4 @@
-From ad1644b076f6520037dc5abb42bc97a18747a2e2 Mon Sep 17 00:00:00 2001
+From 2b0e814af81cd7206c9745841f27fbf37c15f6c8 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Wed, 1 Sep 2021 02:09:14 -0400
 Subject: [PATCH] disable using Play services fonts

@@ -1,4 +1,4 @@
-From d5fbded1d1da95acb32ffae34119efb9e36cbe8a Mon Sep 17 00:00:00 2001
+From 0f152f397952075a0418afde67b5bb44250a39a9 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Sat, 21 Nov 2020 01:30:06 -0500
 Subject: [PATCH] disable checkout_nacl
@@ -8,7 +8,7 @@ Subject: [PATCH] disable checkout_nacl
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/DEPS b/DEPS
-index 5562609988ed0..39f0e4efae6e5 100644
+index 2767ba2cc47c2..741ebc4a465d3 100644
 --- a/DEPS
 +++ b/DEPS
 @@ -112,7 +112,7 @@ vars = {

@@ -1,4 +1,4 @@
-From 0f0dbd9e31cab49bc1e27cb7903429f762b6eeb9 Mon Sep 17 00:00:00 2001
+From 0136eeb2d6f52ab41c390dbade02f66c9f8e53dd Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Mon, 17 Jun 2019 13:14:22 -0400
 Subject: [PATCH] always use local new tab page

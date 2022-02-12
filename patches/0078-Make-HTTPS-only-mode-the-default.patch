@@ -1,4 +1,4 @@
-From efe11dab739a68fc0b3731517760f5f71f3b5444 Mon Sep 17 00:00:00 2001
+From 732abeb10c07b0d35c93f91467c58a397119536b Mon Sep 17 00:00:00 2001
 From: qua3k <cliffmaceyak@gmail.com>
 Date: Mon, 18 Oct 2021 17:18:52 -0400
 Subject: [PATCH] Make HTTPS-only mode the default

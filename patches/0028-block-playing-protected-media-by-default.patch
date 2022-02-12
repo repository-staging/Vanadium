@@ -1,4 +1,4 @@
-From 4bf6f9496127889c372215587f1280193a24c086 Mon Sep 17 00:00:00 2001
+From cd5a7bacd92703032b1b68aa313411d35811cc0d Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Tue, 1 Dec 2020 00:29:28 -0500
 Subject: [PATCH] block playing protected media by default

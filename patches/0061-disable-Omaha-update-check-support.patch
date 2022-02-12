@@ -1,4 +1,4 @@
-From d1fbf5f8cb335692f2b1e25c35d455a9fbca36b3 Mon Sep 17 00:00:00 2001
+From 6da0279c785b459a0f4adb844b05b23f6ca9720d Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Wed, 18 Nov 2020 19:13:27 -0500
 Subject: [PATCH] disable Omaha update check support

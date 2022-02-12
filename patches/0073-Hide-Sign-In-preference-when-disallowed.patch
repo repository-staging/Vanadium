@@ -1,4 +1,4 @@
-From 2b56add0e2cce6245d7cbc00a2a73e4d43a826f5 Mon Sep 17 00:00:00 2001
+From 70109105845bdcb8f09f0aad4e8bb7ae124f5355 Mon Sep 17 00:00:00 2001
 From: fgei <fgei@gmail.com>
 Date: Sun, 29 Aug 2021 19:31:00 +0000
 Subject: [PATCH] Hide Sign In preference when disallowed

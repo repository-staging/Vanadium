@@ -1,4 +1,4 @@
-From 823a5e62f0321ef86e973c5cb3d997144c7e57bf Mon Sep 17 00:00:00 2001
+From 8a383ba7c1a0d407a296eab141b59374ec1c0af9 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Wed, 3 Mar 2021 13:42:41 -0500
 Subject: [PATCH] enable user agent freeze by default

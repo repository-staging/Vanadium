@@ -1,4 +1,4 @@
-From 54a9515f7479c0413f1d022d3e06689fde93f1ea Mon Sep 17 00:00:00 2001
+From 67f53c52ae03bf9ea57f4d77fedd646c67c75391 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Sat, 26 Nov 2016 14:57:22 -0500
 Subject: [PATCH] disable hyperlink auditing by default
@@ -8,7 +8,7 @@ Subject: [PATCH] disable hyperlink auditing by default
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/chrome_content_browser_client.cc b/chrome/browser/chrome_content_browser_client.cc
-index e9a5daa7fcb9c..2a28c7045a1c5 100644
+index db9c606e0ebc3..3fd4223a14378 100644
 --- a/chrome/browser/chrome_content_browser_client.cc
 +++ b/chrome/browser/chrome_content_browser_client.cc
 @@ -1289,7 +1289,7 @@ void ChromeContentBrowserClient::RegisterLocalStatePrefs(

@@ -1,4 +1,4 @@
-From ab8a2c3b2d7252e315a67ae23ffbb3df7c215773 Mon Sep 17 00:00:00 2001
+From 39b55a97518bdcd794881f7b8e3c6c3fc8e83b5f Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Wed, 18 Nov 2020 19:08:58 -0500
 Subject: [PATCH] disable fetching variations

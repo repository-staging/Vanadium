@@ -1,4 +1,4 @@
-From cafe647beb8715320ca356161b9bbe95ddcd9a3b Mon Sep 17 00:00:00 2001
+From 215533ce868e472ec93deb6cba433817572975c2 Mon Sep 17 00:00:00 2001
 From: fgei <fgei@gmail.com>
 Date: Fri, 20 Aug 2021 16:13:42 +0000
 Subject: [PATCH] Move search suggestions back to privacy section.

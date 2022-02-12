@@ -1,4 +1,4 @@
-From 8b78b68bad883b42ce9bb480ebf5e359df7c5b67 Mon Sep 17 00:00:00 2001
+From 009ef4483a78d5acac2361fa1440f0e27ace1e2f Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Thu, 27 May 2021 07:30:02 -0400
 Subject: [PATCH] add back trichrome_chrome_apk targets

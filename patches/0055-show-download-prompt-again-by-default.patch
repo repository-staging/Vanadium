@@ -1,4 +1,4 @@
-From ee92056d716dcf9b65a997851ef019a099a227c2 Mon Sep 17 00:00:00 2001
+From a2a1a5e6bede53c885674df5f6791cd93cab00d1 Mon Sep 17 00:00:00 2001
 From: Daniel Micay <danielmicay@gmail.com>
 Date: Fri, 28 Jun 2019 17:48:49 -0400
 Subject: [PATCH] show download prompt again by default
