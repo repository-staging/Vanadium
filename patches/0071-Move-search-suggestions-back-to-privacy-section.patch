@@ -28,7 +28,7 @@ diff --git a/chrome/android/java/src/org/chromium/chrome/browser/privacy/setting
 index a2fe2d09f15e4..05d1b94167450 100644
 --- a/chrome/android/java/src/org/chromium/chrome/browser/privacy/settings/PrivacySettings.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/privacy/settings/PrivacySettings.java
-@@ -54,6 +54,7 @@ import org.chromium.ui.text.SpanApplier;
+@@ -51,6 +51,7 @@ import org.chromium.ui.text.SpanApplier;
  public class PrivacySettings
          extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
      private static final String PREF_FORCE_NO_JIT = "force_no_jit";
@@ -60,7 +60,8 @@ index a2fe2d09f15e4..05d1b94167450 100644
              UserPrefs.get(Profile.getLastUsedRegularProfile())
                      .setBoolean(Pref.CAN_MAKE_PAYMENT_ENABLED, (boolean) newValue);
          } else if (PREF_FORCE_NO_JIT.equals(key)) {
-@@ -210,6 +219,12 @@ public class PrivacySettings
+@@ -199,6 +208,12 @@ public class PrivacySettings
+     public void updatePreferences() {
  
          PrefService prefService = UserPrefs.get(Profile.getLastUsedRegularProfile());
  
