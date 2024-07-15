@@ -5,20 +5,21 @@ Subject: [PATCH] fixup! content-filtering: Add update handling of subresource
  filter component from config apk
 
 ---
- .../subresource_filter/RulesetUpdater.java    | 33 +++++++++++++++++--
- .../android/ruleset_updater.cc                | 14 ++++++--
- .../android/ruleset_updater.h                 |  2 +-
- 3 files changed, 43 insertions(+), 6 deletions(-)
+ .../subresource_filter/RulesetUpdater.java    | 20 ++++++++++++++++--
+ .../android/ruleset_updater.cc                | 21 +++++++++++++++----
+ .../android/ruleset_updater.h                 | 11 ++++++----
+ 3 files changed, 42 insertions(+), 10 deletions(-)
 
 diff --git a/chrome/browser/subresource_filter/android/java/src/org/chromium/chrome/browser/subresource_filter/RulesetUpdater.java b/chrome/browser/subresource_filter/android/java/src/org/chromium/chrome/browser/subresource_filter/RulesetUpdater.java
-index 06b2010fcfe9c..69bab8915e683 100644
+index 06b2010fcfe9c..d988635edbac4 100644
 --- a/chrome/browser/subresource_filter/android/java/src/org/chromium/chrome/browser/subresource_filter/RulesetUpdater.java
 +++ b/chrome/browser/subresource_filter/android/java/src/org/chromium/chrome/browser/subresource_filter/RulesetUpdater.java
-@@ -7,13 +7,23 @@
+@@ -7,12 +7,20 @@
  
  package org.chromium.chrome.browser.subresource_filter;
  
 +import android.content.Context;
++import android.system.ErrnoException;
 +
 +import org.chromium.base.ContextUtils;
  import org.chromium.base.Log;
@@ -26,52 +27,32 @@ index 06b2010fcfe9c..69bab8915e683 100644
  import org.jni_zero.JNINamespace;
  import org.jni_zero.NativeMethods;
  
-+import com.google.protobuf.ByteString;
++import java.io.InterruptedIOException;
 +
++import app.vanadium.config.SubresourceFilterComponentUtils;
  import app.vanadium.config.VanadiumConfParser;
++import app.vanadium.ext.utils.AtomicFile2;
  
-+import java.io.File;
-+import java.io.FileOutputStream;
-+import java.io.FileNotFoundException;
-+import java.io.IOException;
-+
  @JNINamespace("subresource_filter")
  public class RulesetUpdater {
- 
-@@ -55,17 +65,39 @@ public class RulesetUpdater {
-         if (unindexedRulesetData == null) {
+@@ -56,7 +64,15 @@ public class RulesetUpdater {
              return;
          }
-+        Context ctx = ContextUtils.getApplicationContext();
-+        File unindexedContentFile = new File(ctx.getCacheDir(), UNINDEXED_RULESET_FILE_NAME);
-+        if (unindexedContentFile.exists()) {
-+            unindexedContentFile.delete();
-+        }
-+
-+        try {
-+            if (unindexedContentFile.createNewFile()) {
-+                try (FileOutputStream out = new FileOutputStream(unindexedContentFile)) {
-+                    ByteString unindexedRulesetByteStr = ByteString.copyFrom(unindexedRulesetData);
-+                    unindexedRulesetByteStr.writeTo(out);
-+                }
-+            } else {
-+                Log.i(TAG, "Creation of new file for parsing is unsuccessful");
-+                return;
-+            }
-+        } catch (IOException e) {
-+            Log.w(TAG, "", e);
-+            return;
-+        }
  
 -        RulesetUpdaterJni.get().update(Long.toString(unindexedContentVersionCode));
-+        String unindexedContentFilePath = unindexedContentFile.getAbsolutePath();
++        SubresourceFilterComponentUtils.writeCurrentContents();
++
++        String unindexedContentFilePath = SubresourceFilterComponentUtils.getFilePathForParsing();
++        if (unindexedContentFilePath == null) {
++            Log.w(TAG, "Unable to update ruleset with ignoreVersionCheck: " + ignoreVersionCheck);
++            return;
++        }
++
 +        RulesetUpdaterJni.get().update(Long.toString(unindexedContentVersionCode), unindexedContentFilePath);
      }
  
-+    private static final String UNINDEXED_RULESET_FILE_NAME = "unindexed_subresource_filter";
      public static String version() {
-         return RulesetUpdaterJni.get().version();
-     }
+@@ -65,7 +81,7 @@ public class RulesetUpdater {
  
      @NativeMethods
      interface Natives {
@@ -81,10 +62,21 @@ index 06b2010fcfe9c..69bab8915e683 100644
      }
  }
 diff --git a/chrome/browser/subresource_filter/android/ruleset_updater.cc b/chrome/browser/subresource_filter/android/ruleset_updater.cc
-index 6dc7ccc340cbf..67fbd18ca6f21 100644
+index 6dc7ccc340cbf..afdad76914a22 100644
 --- a/chrome/browser/subresource_filter/android/ruleset_updater.cc
 +++ b/chrome/browser/subresource_filter/android/ruleset_updater.cc
-@@ -17,16 +17,24 @@ using base::android::ScopedJavaLocalRef;
+@@ -1,4 +1,9 @@
+-// Copyright 2022-2023 Zoraver Kang
++// Copyright 2023-2024 GrapheneOS
++// Use of this source code is governed by a GPL-2.0-style license that can be
++// found in the LICENSE file.
++//
++// Copyright 2022-2023 Zoraver Kang, who initially wrote this class
++// and did the preliminary research needed to support content filtering updates.
+ 
+ #include "chrome/browser/subresource_filter/android/ruleset_updater.h"
+ 
+@@ -17,16 +22,24 @@ using base::android::ScopedJavaLocalRef;
  namespace subresource_filter {
  
  static void JNI_RulesetUpdater_Update(JNIEnv *env,
@@ -113,10 +105,22 @@ index 6dc7ccc340cbf..67fbd18ca6f21 100644
    RulesetService *ruleset_service =
        g_browser_process->subresource_filter_ruleset_service();
 diff --git a/chrome/browser/subresource_filter/android/ruleset_updater.h b/chrome/browser/subresource_filter/android/ruleset_updater.h
-index d2260b5e00f6e..052be3818f902 100644
+index d2260b5e00f6e..887e2eeeadfbb 100644
 --- a/chrome/browser/subresource_filter/android/ruleset_updater.h
 +++ b/chrome/browser/subresource_filter/android/ruleset_updater.h
-@@ -8,7 +8,7 @@
+@@ -1,6 +1,9 @@
+-// Copyright 2021 The Chromium Authors
+-// Use of this source code is governed by a BSD-style license that can be
++// Copyright 2023-2024 GrapheneOS
++// Use of this source code is governed by a GPL-2.0-style license that can be
+ // found in the LICENSE file.
++//
++// Copyright 2022-2023 Zoraver Kang, who initially wrote this class
++// and did the preliminary research needed to support content filtering updates.
+ 
+ #ifndef CHROME_BROWSER_SUBRESOURCE_FILTER_ANDROID_RULESET_UPDATER_H_
+ #define CHROME_BROWSER_SUBRESOURCE_FILTER_ANDROID_RULESET_UPDATER_H_
+@@ -8,7 +11,7 @@
  #include <string>
  
  namespace subresource_filter {
@@ -124,5 +128,6 @@ index d2260b5e00f6e..052be3818f902 100644
 +void UpdateRulesetFromConfig(std::string version, std::string path);
  } // namespace subresource_filter
  
- #endif // CHROME_BROWSER_SUBRESOURCE_FILTER_ANDROID_RULESET_UPDATER_H_
+-#endif // CHROME_BROWSER_SUBRESOURCE_FILTER_ANDROID_RULESET_UPDATER_H_
 \ No newline at end of file
++#endif // CHROME_BROWSER_SUBRESOURCE_FILTER_ANDROID_RULESET_UPDATER_H_

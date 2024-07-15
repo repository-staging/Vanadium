@@ -1,12 +1,25 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: fgei <fgei@gmail.com>
 Date: Sun, 14 Jul 2024 03:16:52 +0000
-Subject: [PATCH] fixup! "Use ruleset from config apk whenever it's present"
+Subject: [PATCH] fixup! Use ruleset from config apk whenever it's present
 
 ---
+ .../content/shared/browser/ruleset_service.cc     |  1 +
  .../browser/unindexed_ruleset_stream_generator.cc | 15 ---------------
- 1 file changed, 15 deletions(-)
+ 2 files changed, 1 insertion(+), 15 deletions(-)
 
+diff --git a/components/subresource_filter/content/shared/browser/ruleset_service.cc b/components/subresource_filter/content/shared/browser/ruleset_service.cc
+index 8af356180d22e..c0d99be86f346 100644
+--- a/components/subresource_filter/content/shared/browser/ruleset_service.cc
++++ b/components/subresource_filter/content/shared/browser/ruleset_service.cc
+@@ -478,6 +478,7 @@ void RulesetService::OnWrittenRuleset(WriteRulesetCallback result_callback,
+     return;
+   version.SaveToPrefs(local_state_);
+   std::move(result_callback).Run(version);
++  subresource_filter::DeleteUnindexedSubresourceFile();
+ }
+ 
+ void RulesetService::OpenAndPublishRuleset(
 diff --git a/components/subresource_filter/content/shared/browser/unindexed_ruleset_stream_generator.cc b/components/subresource_filter/content/shared/browser/unindexed_ruleset_stream_generator.cc
 index 337ecdef4d58a..11f98643d5784 100644
 --- a/components/subresource_filter/content/shared/browser/unindexed_ruleset_stream_generator.cc
