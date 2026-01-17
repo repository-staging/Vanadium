@@ -10,12 +10,12 @@ Subject: [PATCH] Support to automatically apply patches to some subprojects
  create mode 100644 vanadium/common/apply_subprojects_patches.py
 
 diff --git a/DEPS b/DEPS
-index f6d9d2f2d6a62..9e30df3484ead 100644
+index c3db0015d3a54..2b29f4d3c9c9d 100644
 --- a/DEPS
 +++ b/DEPS
-@@ -4843,6 +4843,16 @@ hooks = [
+@@ -4903,6 +4903,16 @@ hooks = [
                '--urls',
-               'https://easylist.to/easylistgermany/easylistgermany.txt']
+               'https://easylist-downloads.adblockplus.org/easylistchina.txt']
    },
 +  {
 +    'name': 'apply_subprojects_patches',
