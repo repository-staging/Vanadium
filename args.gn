@@ -1,6 +1,7 @@
 target_os = "android"
 # change to x64 for x86_64 targets
 target_cpu = "arm64"
+#enable_android_secondary_abi = true
 
 android_channel = "stable"
 android_default_version_name = "145.0.7632.26"
@@ -51,9 +52,6 @@ config_apk_certdigest = "c6adb8b83c6d4c17d292afde56fd488a51d316ff8f2c11c5410223b
 config_apk_version_name = "152"
 config_apk_version_code = "152"
 config_apk_is_debug = false
-
-# Only enable secondary arch support for arm64, reducing build time and apk size elsewhere
-enable_android_secondary_abi = target_cpu == "arm64"
 
 # Explicitly disable static analysis as intended for official builds.
 # See //build/config/android/config.gni line 90-92 as of M136
