@@ -1,7 +1,7 @@
 target_os = "android"
 # change to x64 for x86_64 targets
 target_cpu = "arm64"
-#enable_android_secondary_abi = true
+enable_android_secondary_abi = false
 
 android_channel = "stable"
 android_default_version_name = "145.0.7632.45"
