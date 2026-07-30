@@ -12,7 +12,7 @@ diff --git a/vanadium/android_config/proto/host/java/src/app/vanadium/config/hos
 index 24a3312d7b0e4..45e975a6ae297 100644
 --- a/vanadium/android_config/proto/host/java/src/app/vanadium/config/host/ConfigGeneratorImpl.kt
 +++ b/vanadium/android_config/proto/host/java/src/app/vanadium/config/host/ConfigGeneratorImpl.kt
-@@ -67,6 +67,418 @@ fun main(vararg args: String) {
+@@ -67,6 +67,388 @@ fun main(vararg args: String) {
  private fun unsortedConfigs(): List<Config> {
      val configs = ArrayList<Config>()
  
@@ -379,12 +379,6 @@ index 24a3312d7b0e4..45e975a6ae297 100644
 +        },
 +    )
 +
-+    val devicesWithLegacyBrowserPkgName: List<String> = listOf(
-+        "bluejay",
-+        "raven",
-+        "oriole",
-+    )
-+
 +    configs += config {
 +        setSpec(spec {
 +            specTypesWithVersionBounds(
@@ -393,37 +387,13 @@ index 24a3312d7b0e4..45e975a6ae297 100644
 +            )
 +            addAllSysFeatureConditions(
 +                sysFeatureConditions(
-+                    sysFeatureCondition {
-+                        // disabled until the OS fix lands for devices with legacy package name
-+                        disableForAllGosVersions()
++                    sysFeatureCondition {	
++                        setGosVersionBounds(
++                            minGosVersion = GrapheneOsVersion(year = 2026, month = 7, day = 29)
++                        )
 +                    },
 +                )
 +            )
-+            deviceSupportCondition = deviceSupportCondition {
-+                addAllAllowedDevices(devicesWithLegacyBrowserPkgName)
-+            }
-+        })
-+        addAllFlags(enabledJavalessRendererFlags)
-+    }
-+
-+    configs += config {
-+        setSpec(spec {
-+            specTypesWithVersionBounds(
-+                specTypesList = listOf(SpecType.BROWSER),
-+                minVanadiumVersion = VanadiumVersion(major = 7922, minor = 49)
-+            )
-+            addAllSysFeatureConditions(
-+                sysFeatureConditions(
-+                    sysFeatureCondition {
-+                        setGosVersionBounds(
-+                            minGosVersion = GrapheneOsVersion(year = 2026, month = 7, day = 11)
-+                        )
-+                    }
-+                )
-+            )
-+            deviceSupportCondition = deviceSupportCondition {
-+                addAllBlockedDevices(devicesWithLegacyBrowserPkgName)
-+            }
 +        })
 +        addAllFlags(enabledJavalessRendererFlags)
 +    }
